@@ -7,28 +7,15 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 
+private const val TAB_CONTENT = "TAB_CONTENT"
+
 class CafeDetailFragment : Fragment() {
-
-    companion object {
-        private const val ARG_POSITION = "position"
-
-        // Gunakan factory method untuk membuat fragment dengan posisi
-        fun newInstance(position: Int): CafeDetailFragment {
-            val fragment = CafeDetailFragment()
-            val bundle = Bundle()
-            bundle.putInt(ARG_POSITION, position)
-            fragment.arguments = bundle
-            return fragment
-        }
-    }
-
-    private var position: Int = 0
+    private var content: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Ambil posisi dari arguments
         arguments?.let {
-            position = it.getInt(ARG_POSITION)
+            content = it.getString(TAB_CONTENT)
         }
     }
 
@@ -36,17 +23,21 @@ class CafeDetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_cafe_detail, container, false)
-        val textView = view.findViewById<TextView>(R.id.tv_cafe_desc)
+        // Inflate the layout untuk fragment ini
+        return inflater.inflate(R.layout.fragment_cafe_detail, container, false)
+    }
 
-        val descRes = when (position) {
-            0 -> R.string.starbucks_desc
-            1 -> R.string.janjijiwa_desc
-            2 -> R.string.kopikenangan_desc
-            else -> R.string.starbucks_desc
-        }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        view.findViewById<TextView>(R.id.content_description)?.text = content
+    }
 
-        textView.text = getString(descRes)
-        return view
+    companion object {
+        fun newInstance(content: String) =
+            CafeDetailFragment().apply {
+                arguments = Bundle().apply {
+                    putString(TAB_CONTENT, content)
+                }
+            }
     }
 }

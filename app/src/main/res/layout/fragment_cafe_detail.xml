@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    tools:context=".CafeDetailFragment"
+    android:padding="30dp">
 
     <TextView
-        android:id="@+id/tv_cafe_desc"
+        android:id="@+id/content_description"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Hello blank fragment"
-        android:textSize="16sp"/>
+        android:layout_height="match_parent"
+        android:text=""
+        android:textSize="16sp"
+        android:lineSpacingExtra="4dp"/>
 </FrameLayout>
-
